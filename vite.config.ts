@@ -12,6 +12,22 @@ export default defineConfig(({ mode }) => {
         alias: {
           '@': path.resolve(__dirname, '.'),
         }
+      },
+      // Configure for client-side routing (SPA)
+      build: {
+        rollupOptions: {
+          output: {
+            manualChunks: undefined,
+          },
+        },
+      },
+      // Handle client-side routing for development
+      server: {
+        historyApiFallback: true,
+      },
+      // Handle client-side routing for preview
+      preview: {
+        historyApiFallback: true,
       }
     };
 });
