@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sheenam's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+      /* Design System Foundation */
+      :root {
+        /* Spacing scale based on 8px grid */
+        --spacing-xs: 4px;
+        --spacing-sm: 8px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
+        --spacing-2xl: 48px;
+        --spacing-3xl: 64px;
+        --spacing-4xl: 96px;
+        --spacing-5xl: 128px;
+        --spacing-6xl: 192px;
+
+        /* Color system with psychological considerations */
+        --color-primary-50: #ecfeff;
+        --color-primary-300: #67e8f9;
+        --color-primary-500: #06b6d4;
+        --color-primary-600: #0891b2;
+
+        --color-secondary-50: #eff6ff;
+        --color-secondary-400: #60a5fa;
+        --color-secondary-500: #3b82f6;
+        --color-secondary-600: #2563eb;
+
+        /* Typography scale */
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-3xl: 1.875rem;
+        --font-size-4xl: 2.25rem;
+        --font-size-5xl: 3rem;
+        --font-size-6xl: 3.75rem;
+        --font-size-7xl: 4.5rem;
+        --font-size-8xl: 6rem;
+        --font-size-9xl: 8rem;
+
+        /* Animation timing */
+        --duration-fast: 150ms;
+        --duration-normal: 300ms;
+        --duration-slow: 500ms;
+
+        /* Easing functions */
+        --ease-out: cubic-bezier(0, 0, 0.2, 1);
+        --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Global styles */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      /* Prevent layout shift by ensuring consistent heights */
+      .layout-stable {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .content-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      /* For vertical text writing mode */
+      .writing-vertical-rl {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+      }
+
+      /* Enhanced background pattern with mathematical precision */
+      .bg-pattern {
+        background-image:
+          radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.05) 1px, transparent 0);
+        background-size: var(--spacing-lg) var(--spacing-lg);
+        background-position: 0 0;
+      }
+
+      /* Enhanced glass morphism effect */
+      .glass-effect {
+        backdrop-filter: blur(16px) saturate(180%);
+        background-color: rgba(255, 255, 255, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.125);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Consistent focus styles */
+      .focus-ring {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2);
+        transition: box-shadow var(--duration-normal) var(--ease-out);
+      }
+
+      /* Smooth transitions for all interactive elements */
+      .transition-smooth {
+        transition: all var(--duration-normal) var(--ease-out);
+      }
+
+      /* Hover lift effect */
+      .hover-lift {
+        transition: transform var(--duration-normal) var(--ease-out);
+      }
+
+      .hover-lift:hover {
+        transform: translateY(-2px);
+      }
+
+      /* Scale effect for buttons */
+      .hover-scale {
+        transition: transform var(--duration-normal) var(--ease-out);
+      }
+
+      .hover-scale:hover {
+        transform: scale(1.05);
+      }
+
+      /* Consistent shadow system */
+      .shadow-soft {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      }
+
+      .shadow-medium {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      }
+
+      .shadow-strong {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Typography utilities */
+      .text-balance {
+        text-wrap: balance;
+      }
+
+      /* Ensure consistent spacing in grids */
+      .grid-consistent > * {
+        min-height: 0;
+      }
+
+      /* Prevent content overflow */
+      .content-safe {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+    </style>
+    <style>
+      /* Main container minimal-surface styling (no shadows, thin borders) */
+      .container-surface {
+        background-color: rgba(255,255,255,0.92);
+        border: 1px solid rgba(17, 24, 39, 0.08); /* very thin border */
+        backdrop-filter: blur(10px) saturate(140%);
+      }
+
+      /* Subtle pattern that stays inside the main container only */
+      .container-pattern {
+        background-image:
+          radial-gradient(circle at 1px 1px, rgba(2, 132, 199, 0.06) 1px, transparent 0);
+        background-size: 22px 22px;
+        background-position: 0 0;
+      }
+
+      /* Remove any box-shadows within the container to keep it minimal */
+      .no-shadows, .no-shadows * {
+        box-shadow: none !important;
+      }
+
+      /* Enhanced tab transition animations */
+      .tab-fade {
+        animation: tabTransition 450ms var(--ease-out);
+      }
+
+      @keyframes tabTransition {
+        0% {
+          opacity: 0;
+          transform: translateY(12px) scale(0.98);
+          filter: blur(1px);
+        }
+        40% {
+          opacity: 0.6;
+          transform: translateY(4px) scale(0.99);
+          filter: blur(0.5px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      /* Smooth exit animation for outgoing content */
+      .tab-exit {
+        animation: tabExit 200ms var(--ease-in-out) forwards;
+      }
+
+      @keyframes tabExit {
+        0% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-8px) scale(0.98);
+        }
+      }
+
+      /* Enhanced transition timing for smoother feel */
+      .transition-smooth {
+        transition: all var(--duration-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      /* Staggered animation for content elements */
+      .stagger-fade {
+        animation: staggerFadeIn 600ms var(--ease-out) forwards;
+        opacity: 0;
+      }
+
+      .stagger-fade:nth-child(1) { animation-delay: 100ms; }
+      .stagger-fade:nth-child(2) { animation-delay: 150ms; }
+      .stagger-fade:nth-child(3) { animation-delay: 200ms; }
+      .stagger-fade:nth-child(4) { animation-delay: 250ms; }
+      .stagger-fade:nth-child(5) { animation-delay: 300ms; }
+
+      @keyframes staggerFadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Typography background - static styling */
+      .typography-layer {
+        transition: opacity 300ms ease;
+      }
+
+
+
+
+
+
+
+      @keyframes pulse-slow {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(1.05); }
+      }
+
+      @keyframes pulse-slow-2 {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(1.08); }
+      }
+
+      .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
+      .animate-pulse-slow-2 { animation: pulse-slow-2 8s ease-in-out infinite; }
+
+      /* Static typography styling */
+      .static-typography {
+        transition: opacity 400ms ease;
+      }
+
+
+
+
+
+      /* Performance optimizations */
+      .typography-layer,
+      .static-typography,
+      .typography-accent {
+        will-change: opacity;
+        backface-visibility: hidden;
+      }
+
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        .tab-fade,
+        .tab-exit,
+        .stagger-fade,
+        .static-typography,
+        .typography-layer,
+        .animate-pulse-slow,
+        .animate-pulse-slow-2 {
+          animation: none !important;
+          transition: opacity 0.2s ease !important;
+        }
+
+        .transition-smooth {
+          transition: opacity 0.2s ease !important;
+        }
+      }
+
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        .typography-layer svg {
+          opacity: 0.8;
+        }
+
+        .static-typography * {
+          opacity: 0.9 !important;
+        }
+      }
+
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        .static-typography {
+          transform: scale(0.8);
+        }
+
+        .typography-accent > div {
+          transform: scale(0.7) !important;
+        }
+
+        /* Enhanced mobile typography */
+        h1, .text-6xl, .text-7xl, .text-8xl {
+          font-size: 2.5rem !important; /* 40px */
+          line-height: 1.2 !important;
+        }
+
+        h2, .text-4xl, .text-5xl {
+          font-size: 2rem !important; /* 32px */
+          line-height: 1.25 !important;
+        }
+
+        h3, .text-2xl, .text-3xl {
+          font-size: 1.5rem !important; /* 24px */
+          line-height: 1.3 !important;
+        }
+
+        /* Better mobile spacing */
+        .p-\[32px\] {
+          padding: 16px !important;
+        }
+
+        .p-\[48px\] {
+          padding: 20px !important;
+        }
+
+        .p-\[64px\] {
+          padding: 24px !important;
+        }
+
+        .px-\[32px\] {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+
+        .py-\[32px\] {
+          padding-top: 16px !important;
+          padding-bottom: 16px !important;
+        }
+
+        /* Mobile container adjustments */
+        .container-surface {
+          margin: 8px !important;
+          border-radius: 16px !important;
+          min-height: calc(100vh - 16px) !important;
+        }
+
+        /* Mobile button improvements */
+        button, .btn {
+          min-height: 48px !important;
+          padding: 12px 24px !important;
+          font-size: 16px !important;
+        }
+
+        /* Mobile touch targets */
+        a, button, [role="button"] {
+          min-height: 44px !important;
+          min-width: 44px !important;
+        }
+
+        /* Mobile text improvements */
+        .text-lg {
+          font-size: 1rem !important; /* 16px */
+        }
+
+        .text-base {
+          font-size: 0.875rem !important; /* 14px */
+        }
+
+        /* Mobile gap adjustments */
+        .gap-\[48px\] {
+          gap: 24px !important;
+        }
+
+        .gap-\[64px\] {
+          gap: 32px !important;
+        }
+
+        .gap-\[32px\] {
+          gap: 20px !important;
+        }
+
+        .gap-\[24px\] {
+          gap: 16px !important;
+        }
+      }
+
+      /* Extra small mobile devices (320px and up) */
+      @media (max-width: 480px) {
+        .container-surface {
+          margin: 4px !important;
+          border-radius: 12px !important;
+          min-height: calc(100vh - 8px) !important;
+        }
+
+        h1, .text-6xl, .text-7xl, .text-8xl {
+          font-size: 2rem !important; /* 32px */
+        }
+
+        h2, .text-4xl, .text-5xl {
+          font-size: 1.75rem !important; /* 28px */
+        }
+
+        .p-\[32px\] {
+          padding: 12px !important;
+        }
+
+        .px-\[32px\] {
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+        }
+
+        /* Smaller gaps for very small screens */
+        .gap-\[48px\] {
+          gap: 16px !important;
+        }
+
+        .gap-\[32px\] {
+          gap: 12px !important;
+        }
+
+        /* Enhanced swipe navigation for mobile */
+        .swipe-edge-indicator {
+          width: 2px !important;
+          border-radius: 2px !important;
+        }
+
+        /* Better touch responsiveness */
+        button, a {
+          min-width: 44px !important;
+          min-height: 44px !important;
+        }
+
+        /* Improved swipe feedback */
+        .swipe-feedback-active {
+          animation: swipeIndicatorPulse 0.3s ease-in-out !important;
+        }
+
+        /* Better mobile menu button for small screens */
+        .lg\:hidden button {
+          width: 48px !important;
+          height: 48px !important;
+          transition: all 0.2s ease !important;
+        }
+
+        .lg\:hidden button:active {
+          transform: scale(0.95) !important;
+          background-color: rgba(229, 231, 235, 0.8) !important;
+        }
+
+        /* Mobile navigation loading states */
+        .tab-loading {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .tab-loading::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.2), transparent);
+          animation: shimmer 1.5s infinite;
+        }
+
+        /* Enhanced swipe touch feedback */
+        .swipe-resistance {
+          animation: swipeResistance 0.2s ease-out !important;
+        }
+
+        /* Mobile navigation progress indicator */
+        .nav-progress {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #06b6d4, #3b82f6);
+          transition: width 0.3s ease;
+        }
+      }
+
+      /* Very small screens (320px) */
+      @media (max-width: 360px) {
+        .container-surface {
+          margin: 2px !important;
+          border-radius: 8px !important;
+        }
+
+        /* Enhanced swipe navigation for very small screens */
+        .swipe-edge-indicator {
+          width: 3px !important;
+        }
+
+        /* Better touch targets for very small screens */
+        button {
+          min-width: 44px !important;
+          min-height: 44px !important;
+        }
+
+        /* Optimize text sizes for small screens */
+        .text-sm {
+          font-size: 13px !important;
+        }
+
+        .text-xs {
+          font-size: 11px !important;
+        }
+
+        /* Ensure swipe feedback is visible */
+        .swipe-feedback-active {
+          transform: scale(1.05) !important;
+        }
+
+        /* Better spacing for small screens */
+        .px-4 {
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+        }
+
+        .py-2 {
+          padding-top: 8px !important;
+          padding-bottom: 8px !important;
+        }
+      }
+
+      /* Mobile-specific touch and interaction improvements */
+      @media (max-width: 768px) {
+        /* Remove hover effects on mobile to prevent sticky states */
+        .hover\:shadow-xl:hover,
+        .hover\:-translate-y-1:hover,
+        .hover\:-translate-y-2:hover,
+        .hover\:scale-105:hover,
+        .hover\:scale-110:hover {
+          transform: none !important;
+          box-shadow: inherit !important;
+        }
+
+        /* Enhanced touch targets for mobile */
+        .focus-ring:focus {
+          outline: 2px solid #06b6d4 !important;
+          outline-offset: 2px !important;
+        }
+
+        /* Better mobile scrolling */
+        * {
+          -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevent zoom on input focus */
+        input, select, textarea {
+          font-size: 16px !important;
+        }
+
+        /* Mobile-friendly animations */
+        .transition-smooth {
+          transition: all 0.2s ease !important;
+        }
+
+        /* Improve mobile text selection */
+        .select-none {
+          -webkit-user-select: text !important;
+          user-select: text !important;
+        }
+
+        /* Better mobile tap highlights */
+        * {
+          -webkit-tap-highlight-color: rgba(6, 182, 212, 0.1);
+        }
+
+        /* Mobile-specific button improvements */
+        button:active,
+        [role="button"]:active {
+          transform: scale(0.98) !important;
+          transition: transform 0.1s ease !important;
+        }
+
+        /* Improve mobile menu positioning */
+        .fixed {
+          position: fixed !important;
+        }
+
+        /* Better mobile backdrop */
+        .backdrop-blur-sm {
+          backdrop-filter: blur(4px) !important;
+        }
+
+        .backdrop-blur-md {
+          backdrop-filter: blur(8px) !important;
+        }
+
+        /* Enhanced swipe navigation accessibility */
+        .swipe-indicator button:focus {
+          outline: 2px solid #06b6d4 !important;
+          outline-offset: 2px !important;
+          z-index: 10 !important;
+        }
+
+        /* Better mobile menu overlay */
+        .bg-black\/20 {
+          background-color: rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* Smooth mobile menu transitions */
+        .animate-in {
+          animation: slideInFromTop 0.25s ease-out !important;
+        }
+
+        /* Swipe navigation spacing improvements */
+        .swipe-indicator {
+          padding: 8px 12px !important;
+        }
+
+        /* Better swipe active state visibility */
+        .swipe-feedback-active {
+          box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3) !important;
+        }
+      }
+
+      /* Touch device optimizations */
+      @media (hover: none) and (pointer: coarse) {
+        /* Remove all hover effects on touch devices */
+        .hover\:bg-gray-100:hover,
+        .hover\:bg-cyan-50:hover,
+        .hover\:text-black:hover,
+        .hover\:text-cyan-600:hover,
+        .hover\:text-cyan-700:hover,
+        .hover\:text-blue-700:hover,
+        .hover\:text-indigo-700:hover {
+          background-color: inherit !important;
+          color: inherit !important;
+        }
+
+        /* Use active states instead of hover for touch */
+        .hover\:bg-gray-100:active {
+          background-color: #f3f4f6 !important;
+        }
+
+        .hover\:bg-cyan-50:active {
+          background-color: #ecfeff !important;
+        }
+
+        .hover\:text-cyan-600:active {
+          color: #0891b2 !important;
+        }
+      }
+
+      /* GPU acceleration for smooth transitions */
+      .tab-fade,
+      .tab-exit,
+      .static-typography > *,
+      .typography-accent > * {
+        transform: translateZ(0);
+      }
+
+      /* Mobile-specific animations */
+      @keyframes slideInFromTop {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideInFromLeft {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideInFromRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.3);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -200px 0;
+        }
+        100% {
+          background-position: calc(200px + 100%) 0;
+        }
+      }
+
+      .animate-in {
+        animation: slideInFromTop 0.3s ease-out;
+      }
+
+      .slide-in-from-top {
+        animation: slideInFromTop 0.3s ease-out;
+      }
+
+      .slide-in-from-left {
+        animation: slideInFromLeft 0.3s ease-out;
+      }
+
+      .slide-in-from-right {
+        animation: slideInFromRight 0.3s ease-out;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .bounce-in {
+        animation: bounceIn 0.5s ease-out;
+      }
+
+      .shimmer {
+        background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.1), transparent);
+        background-size: 200px 100%;
+        animation: shimmer 2s infinite;
+      }
+
+      /* Mobile scroll improvements */
+      @media (max-width: 768px) {
+        .overflow-hidden {
+          overflow-x: hidden !important;
+          overflow-y: auto !important;
+        }
+
+        /* Smooth scrolling for mobile */
+        html {
+          scroll-behavior: smooth;
+        }
+
+        /* Better mobile focus indicators */
+        :focus-visible {
+          outline: 2px solid #06b6d4;
+          outline-offset: 2px;
+          border-radius: 4px;
+        }
+
+        /* Ensure swipe navigation is always accessible */
+        .swipe-indicator {
+          max-width: 100vw !important;
+          overflow-x: hidden !important;
+        }
+
+        /* Swipe navigation text wrapping prevention */
+        .swipe-indicator button {
+          white-space: nowrap !important;
+          text-overflow: ellipsis !important;
+          overflow: hidden !important;
+        }
+
+        /* Better mobile menu button positioning */
+        .lg\:hidden {
+          position: relative !important;
+          z-index: 60 !important;
+        }
+
+        /* Ensure mobile overlay covers everything */
+        .bg-black\/20 {
+          z-index: 40 !important;
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          bottom: 0 !important;
+        }
+
+        /* Swipe navigation performance optimization */
+        .swipe-indicator, .swipe-edge-indicator {
+          will-change: transform !important;
+          transform: translateZ(0) !important;
+        }
+      }
+
+      /* Landscape mobile optimization for swipe navigation */
+      @media (max-width: 768px) and (orientation: landscape) {
+        .swipe-indicator {
+          padding: 4px 8px !important;
+        }
+
+        .swipe-indicator button {
+          min-height: 44px !important;
+          padding: 6px 8px !important;
+          font-size: 13px !important;
+        }
+
+        /* Compact swipe feedback for landscape */
+        .swipe-edge-indicator {
+          width: 2px !important;
+        }
+
+        /* Better landscape swipe detection */
+        .swipe-feedback-active {
+          transform: scale(1.02) !important;
+        }
+      }
+
+      /* Swipe gesture feedback animations */
+      @keyframes swipeIndicatorPulse {
+        0% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.1); opacity: 1; }
+        100% { transform: scale(1); opacity: 0.8; }
+      }
+
+      @keyframes swipeResistance {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(5px); }
+        100% { transform: translateX(0); }
+      }
+
+      .swipe-feedback-active {
+        animation: swipeIndicatorPulse 0.3s ease-in-out;
+      }
+
+      .swipe-resistance {
+        animation: swipeResistance 0.2s ease-out;
+      }
+
+      /* Enhanced swipe visual feedback */
+      .swipe-edge-indicator {
+        background: linear-gradient(to bottom,
+          rgba(6, 182, 212, 0.8) 0%,
+          rgba(59, 130, 246, 0.8) 50%,
+          rgba(6, 182, 212, 0.8) 100%
+        );
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+      }
+
+      /* High DPI mobile screens and additional responsive improvements */
+      @media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+        /* Sharper text rendering */
+        * {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Enhanced swipe indicators for high DPI */
+        .swipe-edge-indicator {
+          box-shadow: 0 0 15px rgba(6, 182, 212, 0.4) !important;
+        }
+      }
+
+      /* Additional responsive breakpoints */
+      @media (max-width: 480px) {
+        /* Medium mobile screens */
+        .container-surface {
+          margin: 4px !important;
+          border-radius: 12px !important;
+        }
+
+        .swipe-indicator {
+          padding: 6px 8px !important;
+        }
+      }
+
+      @media (max-width: 375px) {
+        /* Small mobile screens (iPhone SE, etc.) */
+        .text-2xl {
+          font-size: 1.4rem !important;
+        }
+
+        .text-lg {
+          font-size: 1rem !important;
+        }
+
+        /* Optimize swipe feedback for small screens */
+        .swipe-edge-indicator {
+          width: 3px !important;
+        }
+      }
+
+      /* Cross-browser compatibility improvements */
+      @supports (-webkit-touch-callout: none) {
+        /* iOS Safari specific optimizations */
+        .swipe-edge-indicator {
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+        }
+
+        /* Prevent iOS bounce scrolling interference */
+        body {
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: none;
+        }
+      }
+
+      /* Android Chrome optimizations */
+      @media (max-width: 768px) {
+        /* Improve touch responsiveness on Android */
+        * {
+          touch-action: manipulation;
+        }
+
+        /* Better scrolling performance */
+        .content-container {
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: none;
+        }
+      }
+
+      /* Accessibility improvements for reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .swipe-feedback-active,
+        .swipe-resistance {
+          animation: none !important;
+        }
+
+        .transition-all,
+        .transition-transform {
+          transition: none !important;
+        }
+      }
+    </style>
+
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-icons/": "https://esm.sh/react-icons@5.2.1/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-white overflow-hidden">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
