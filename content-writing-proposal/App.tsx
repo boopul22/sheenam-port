@@ -34,13 +34,13 @@ function App() {
 
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <Header />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-24 sm:space-y-32">
         <div>
           <h2 className="text-4xl sm:text-5xl font-bold text-center text-white mb-4 font-display">Pricing & Services</h2>
-          <p className="text-center text-lg text-slate-400 max-w-3xl mx-auto mb-12">Flexible and transparent pricing to match your content needs. Calculate your investment for high-quality blog content.</p>
-          <PricingCalculator 
+          <p className="text-center text-lg text-slate-200 max-w-3xl mx-auto mb-12 leading-relaxed">Flexible and transparent pricing to match your content needs. Calculate your investment for high-quality blog content.</p>
+          <PricingCalculator
             wordCount={wordCount}
             setWordCount={setWordCount}
             includeSeo={includeSeo}

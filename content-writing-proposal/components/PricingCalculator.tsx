@@ -9,12 +9,12 @@ interface ToggleSwitchProps {
 }
 
 const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ label, enabled, onChange }) => (
-  <label className="flex items-center justify-between cursor-pointer">
-    <span className="text-slate-300">{label}</span>
+  <label className="flex items-center justify-between cursor-pointer group">
+    <span className="text-slate-100 font-medium group-hover:text-white transition-colors">{label}</span>
     <div className="relative">
       <input type="checkbox" className="sr-only" checked={enabled} onChange={(e) => onChange(e.target.checked)} />
-      <div className={`block w-14 h-8 rounded-full transition-colors ${enabled ? 'bg-cyan-500' : 'bg-slate-600'}`}></div>
-      <div className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform ${enabled ? 'transform translate-x-6' : ''}`}></div>
+      <div className={`block w-14 h-8 rounded-full transition-all duration-300 ${enabled ? 'bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg shadow-cyan-500/25' : 'bg-slate-600 hover:bg-slate-500'}`}></div>
+      <div className={`dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-all duration-300 shadow-md ${enabled ? 'transform translate-x-6' : ''}`}></div>
     </div>
   </label>
 );
@@ -43,13 +43,15 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({
   const formatCurrency = (amount: number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
 
   return (
-    <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 bg-slate-800/50 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm border border-slate-700">
-      <div className="p-8 lg:col-span-3">
-        <h3 className="text-2xl font-bold text-white mb-6">Blog & Article Cost Calculator</h3>
-        
-        <div className="space-y-6">
-          <div>
-            <label htmlFor="word-count" className="block text-sm font-medium text-slate-300 mb-2">Word Count</label>
+    <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+      {/* Calculator Section */}
+      <div className="lg:col-span-2 bg-gradient-to-br from-slate-800/90 to-slate-900/90 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm border border-slate-600/50 p-6 sm:p-8">
+        <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 text-center lg:text-left">Blog & Article Cost Calculator</h3>
+
+        <div className="space-y-8">
+          {/* Word Count Slider */}
+          <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600/30">
+            <label htmlFor="word-count" className="block text-base font-semibold text-slate-100 mb-4">Word Count</label>
             <input
               type="range"
               id="word-count"
@@ -58,55 +60,91 @@ export const PricingCalculator: React.FC<PricingCalculatorProps> = ({
               step="100"
               value={wordCount}
               onChange={(e) => setWordCount(parseInt(e.target.value))}
-              className="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+              className="w-full h-3 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-cyan-500 hover:accent-cyan-400 transition-colors"
             />
-            <div className="text-center mt-2 text-white font-bold text-lg">{wordCount} words</div>
-          </div>
-          
-          <div className="space-y-4 pt-4 border-t border-slate-700">
-              <ToggleSwitch label="SEO Optimization" enabled={includeSeo} onChange={setIncludeSeo} />
-              <p className="text-sm text-slate-400 pl-2">Keyword integration, meta title & description, headings, and internal linking.</p>
+            <div className="text-center mt-4">
+              <span className="inline-block bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold text-xl px-4 py-2 rounded-lg shadow-lg">
+                {wordCount} words
+              </span>
+            </div>
           </div>
 
-          <div className="space-y-4 pt-4 border-t border-slate-700">
+          {/* SEO Option */}
+          <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600/30">
+              <ToggleSwitch label="SEO Optimization" enabled={includeSeo} onChange={setIncludeSeo} />
+              <p className="text-sm text-slate-200 mt-3 pl-2 leading-relaxed">Keyword integration, meta title & description, headings, and internal linking.</p>
+          </div>
+
+          {/* Images Option */}
+          <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600/30">
               <ToggleSwitch label="High-Quality Stock Images" enabled={includeImages} onChange={setIncludeImages} />
-              <p className="text-sm text-slate-400 pl-2">Licensed, royalty-free images, including sourcing and resizing.</p>
+              <p className="text-sm text-slate-200 mt-3 pl-2 leading-relaxed">Licensed, royalty-free images, including sourcing and resizing.</p>
           </div>
         </div>
       </div>
-      
-      <div className="p-8 lg:col-span-2 bg-slate-900/70 flex flex-col">
-        <h3 className="text-xl font-bold text-white mb-4">Your Estimate</h3>
-        <div className="flex-grow space-y-3 text-sm">
-          <div className="flex justify-between">
-            <span>Writing Fee</span>
-            <span className="font-medium text-white">{formatCurrency(pricingDetails.writingFee)}</span>
-          </div>
-          <div className="text-xs text-right text-slate-400 -mt-2">
-            (@ ₹{pricingDetails.rate.toFixed(2)} / word)
+
+      {/* Pricing Estimate Section */}
+      <div className="bg-gradient-to-br from-slate-900/95 to-slate-800/95 rounded-2xl shadow-2xl border border-slate-600/50 p-6 sm:p-8 backdrop-blur-sm">
+        <h3 className="text-2xl font-bold text-white mb-6 text-center">Your Estimate</h3>
+
+        <div className="space-y-4">
+          {/* Writing Fee */}
+          <div className="bg-slate-700/40 rounded-lg p-4 border border-slate-600/30">
+            <div className="flex justify-between items-center">
+              <div>
+                <span className="text-slate-100 font-medium">Writing Fee</span>
+                <div className="text-xs text-slate-300 mt-1">
+                  @ ₹{pricingDetails.rate.toFixed(2)} per word
+                </div>
+              </div>
+              <span className="font-bold text-white text-lg">{formatCurrency(pricingDetails.writingFee)}</span>
+            </div>
           </div>
 
-          <div className={`flex justify-between transition-opacity duration-300 ${includeSeo ? 'opacity-100' : 'opacity-30'}`}>
-            <span>SEO Optimization</span>
-            <span className="font-medium text-white">{formatCurrency(pricingDetails.seoFee)}</span>
-          </div>
-          
-          <div className={`flex justify-between transition-opacity duration-300 ${includeImages ? 'opacity-100' : 'opacity-30'}`}>
-            <span>Stock Images</span>
-            <span className="font-medium text-white">{formatCurrency(pricingDetails.imageFee)}</span>
+          {/* SEO Optimization */}
+          <div className={`bg-slate-700/40 rounded-lg p-4 border border-slate-600/30 transition-all duration-300 ${includeSeo ? 'opacity-100 border-cyan-500/30' : 'opacity-50'}`}>
+            <div className="flex justify-between items-center">
+              <div>
+                <span className="text-slate-100 font-medium">SEO Optimization</span>
+                <div className="text-xs text-slate-300 mt-1">
+                  {includeSeo ? 'Included' : 'Not selected'}
+                </div>
+              </div>
+              <span className="font-bold text-white text-lg">{formatCurrency(pricingDetails.seoFee)}</span>
+            </div>
           </div>
 
-          <div className={`pt-4 mt-4 border-t-2 transition-all duration-500 ${isSpecialOfferActive ? 'border-cyan-500' : 'border-slate-700'}`}>
-              {isSpecialOfferActive && (
-                 <div className="text-center text-cyan-400 bg-cyan-900/50 p-3 rounded-lg mb-4 text-xs font-bold transition-all duration-300">
-                    SPECIAL OFFER APPLIED!
-                    <br/>
-                    Writing rate discounted to ₹1.3/word.
-                 </div>
-              )}
+          {/* Stock Images */}
+          <div className={`bg-slate-700/40 rounded-lg p-4 border border-slate-600/30 transition-all duration-300 ${includeImages ? 'opacity-100 border-cyan-500/30' : 'opacity-50'}`}>
+            <div className="flex justify-between items-center">
+              <div>
+                <span className="text-slate-100 font-medium">Stock Images</span>
+                <div className="text-xs text-slate-300 mt-1">
+                  {includeImages ? 'Included' : 'Not selected'}
+                </div>
+              </div>
+              <span className="font-bold text-white text-lg">{formatCurrency(pricingDetails.imageFee)}</span>
+            </div>
+          </div>
+
+          {/* Special Offer Banner */}
+          {isSpecialOfferActive && (
+             <div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/50 rounded-lg p-4 text-center animate-pulse">
+                <div className="text-cyan-300 font-bold text-sm mb-1">🎉 SPECIAL OFFER APPLIED!</div>
+                <div className="text-cyan-200 text-xs">Writing rate discounted to ₹{pricingDetails.rate}/word when both SEO & Images are selected</div>
+             </div>
+          )}
+
+          {/* Total */}
+          <div className={`bg-gradient-to-r from-slate-800 to-slate-700 rounded-xl p-6 border-2 transition-all duration-500 ${isSpecialOfferActive ? 'border-cyan-400/50 shadow-lg shadow-cyan-500/20' : 'border-slate-600/50'}`}>
              <div className="flex justify-between items-center">
-                <span className="text-xl font-bold text-white">Total</span>
-                <span className="text-3xl font-extrabold text-cyan-400">{formatCurrency(pricingDetails.total)}</span>
+                <span className="text-xl font-bold text-white">Total Investment</span>
+                <div className="text-right">
+                  <div className="text-3xl font-extrabold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    {formatCurrency(pricingDetails.total)}
+                  </div>
+                  <div className="text-xs text-slate-300 mt-1">All inclusive</div>
+                </div>
              </div>
           </div>
         </div>
